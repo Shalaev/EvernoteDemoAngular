@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head >
+    <meta charset="UTF-8">
+    <title>Evernote Demo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.1/angular.min.js"></script>
+    <script src="js/script.js"></script>
+</head>
+<body>
+    <main>
+        <div class="l-wrapper">
+            <form class="b-form" method="post" action="#" ng-app="evernote">
+                <h1 class="b-form__title" >Evernote demo</h1>
+                <hr>
+                <table class="b-form__table" ng-controller="EvernoteController">
+                    <tr class="b-form__row">
+                        <td class="b-form__column b-form__mode_control">
+                            <input class="b-form__input" type="text" placeholder="Add new note" ng-model="noteName" >
+                        </td>
+                        <td class="b-form__column b-form__mode_control">
+                            <input class="b-form__button" type="button" ng-click="addNote()" value="Add">
+                        </td>
+                    </tr>
+                    <tr class="b-form__row" ng-repeat="note in data.notes | filter : selectShortFilter" id="note{{note.id}}">
+                        <td class="b-form__column b-form__mode_note {{note.checked | checkstatus}}" ><!--| checknote-->
+                            <label class="b-form__notetext">{{note.title}}</label>
+                        </td>
+                        <td class="b-form__column b-form__mode_note l-center">
+                            <!--input type="checkbox" id="1"-->
+                            <span ng-click="checkNote($index)" class="b-form_button b-form_check">&#10004;</span>
+                            <span ng-click="deleteNote($index)" class="b-form_button b-form_delete">&#10006;</span>
+                        </td>
+                    </tr>
+                    <tr class="b-form__row">
+                        <td class="b-form__column b-form__mode_control">
+                            <input  ng-repeat="short in data.shortvars" ng-click="select(short)" class="b-form__button {{isActive(short)}}" type="button" value="{{short}}">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
